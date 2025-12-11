@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>離散數學教學遊戲</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>離散數學教學遊戲</h1>
+            <p class="subtitle">透過互動遊戲學習離散數學</p>
+        </header>
+
+        <div id="menu" class="menu">
+            <h2>選擇主題</h2>
+            <div class="topic-grid">
+                <button class="topic-btn" onclick="startTopic('sets')">
+                    <div class="topic-icon">∪</div>
+                    <h3>集合論</h3>
+                    <p>學習集合的基本概念與運算</p>
+                </button>
+                <button class="topic-btn" onclick="startTopic('logic')">
+                    <div class="topic-icon">⊨</div>
+                    <h3>邏輯</h3>
+                    <p>命題邏輯與謂詞邏輯</p>
+                </button>
+                <button class="topic-btn" onclick="startTopic('graph')">
+                    <div class="topic-icon">⊚</div>
+                    <h3>圖論</h3>
+                    <p>圖的性質與應用</p>
+                </button>
+                <button class="topic-btn" onclick="startTopic('combinatorics')">
+                    <div class="topic-icon">C</div>
+                    <h3>組合學</h3>
+                    <p>排列、組合與計數原理</p>
+                </button>
+            </div>
+            <div class="score-display">
+                <h3>總分: <span id="totalScore">0</span></h3>
+            </div>
+        </div>
+
+        <div id="game" class="game hidden">
+            <div class="game-header">
+                <button class="back-btn" onclick="backToMenu()">← 返回主選單</button>
+                <h2 id="topicTitle"></h2>
+                <div class="score">分數: <span id="currentScore">0</span></div>
+            </div>
+            
+            <div id="content" class="content">
+                <div id="explanation" class="explanation"></div>
+                <div id="question" class="question"></div>
+                <div id="options" class="options"></div>
+                <div id="feedback" class="feedback"></div>
+                <button id="nextBtn" class="next-btn hidden" onclick="nextQuestion()">下一題</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
