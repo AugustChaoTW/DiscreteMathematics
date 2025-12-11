@@ -1,0 +1,589 @@
+/* Ramsey 豆子遊戲樣式 */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #667eea;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Theory Section */
+.theory-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.theory-section h2 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.theory-content p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.ramsey-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.example {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.example strong {
+    color: #667eea;
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Game Rules */
+.game-section {
+    margin-bottom: 30px;
+}
+
+.game-section h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+}
+
+.rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.rule {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: start;
+    gap: 15px;
+}
+
+.rule-number {
+    background: #e17055;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.rule p {
+    line-height: 1.6;
+}
+
+/* Game Controls */
+.game-controls {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.game-controls h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.preset-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.preset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.custom-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 2px solid #dee2e6;
+}
+
+.custom-input input {
+    width: 80px;
+    padding: 8px;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    font-size: 1em;
+    text-align: center;
+}
+
+.start-btn {
+    background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 184, 148, 0.4);
+}
+
+/* Game Board */
+.game-board {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.game-info {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.player-info {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.player1 {
+    border: 3px solid #74b9ff;
+}
+
+.player2 {
+    border: 3px solid #fd79a8;
+}
+
+.player-info h3 {
+    margin-bottom: 10px;
+    color: #667eea;
+}
+
+.player-status {
+    font-size: 1.1em;
+    color: #666;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.player-status.active {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    color: #2d3436;
+    font-weight: bold;
+}
+
+.beans-count {
+    text-align: center;
+}
+
+.beans-count h3 {
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.count-display {
+    font-size: 3em;
+    font-weight: bold;
+    color: #e17055;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid #e17055;
+}
+
+/* Beans Container */
+.beans-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    min-height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.bean {
+    width: 40px;
+    height: 50px;
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+    border-radius: 20px 20px 25px 25px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: beanPop 0.5s ease-out;
+}
+
+.bean::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    width: 15px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+/* 不同顏色的豆子 */
+.bean-color-0 {
+    background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+}
+
+.bean-color-1 {
+    background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);
+}
+
+.bean-color-2 {
+    background: linear-gradient(135deg, #fd79a8 0%, #fab1a0 100%);
+}
+
+.bean-color-3 {
+    background: linear-gradient(135deg, #fdcb6e 0%, #ffeaa7 100%);
+}
+
+.bean-color-4 {
+    background: linear-gradient(135deg, #74b9ff 0%, #a29bfe 100%);
+}
+
+@keyframes beanPop {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+        opacity: 1;
+    }
+}
+
+/* Action Buttons */
+.action-buttons {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.action-buttons h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.take-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.take-btn {
+    background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.take-btn:hover:not(.disabled) {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(225, 112, 85, 0.4);
+}
+
+.take-btn.disabled {
+    background: #dfe6e9;
+    color: #b2bec3;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Game History */
+.game-history {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.game-history h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.history-log {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-entry {
+    padding: 8px 12px;
+    margin-bottom: 5px;
+    background: #f8f9fa;
+    border-left: 3px solid #667eea;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+/* Reset Button */
+.reset-btn {
+    background: linear-gradient(135deg, #636e72 0%, #2d3436 100%);
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: block;
+    margin: 0 auto;
+    font-weight: 600;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(45, 52, 54, 0.4);
+}
+
+/* Game Over */
+.game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.winner-announcement {
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    animation: slideUp 0.5s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.winner-announcement h2 {
+    font-size: 2.5em;
+    color: #00b894;
+    margin-bottom: 20px;
+}
+
+.winner-announcement p {
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.strategy-hint {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #fdcb6e;
+    margin-top: 20px;
+}
+
+.play-again-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 50px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.play-again-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+/* Strategy Section */
+.strategy-section {
+    background: linear-gradient(135deg, #dfe6e9 0%, #b2bec3 100%);
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 30px;
+}
+
+.strategy-section h2 {
+    color: #2d3436;
+    margin-bottom: 20px;
+}
+
+.strategy-content p {
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.strategy-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.strategy-content li {
+    background: white;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #00b894;
+}
+
+.strategy-content strong {
+    color: #e17055;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .ramsey-examples {
+        grid-template-columns: 1fr;
+    }
+    
+    .rules {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-info {
+        grid-template-columns: 1fr;
+    }
+    
+    .preset-buttons {
+        flex-direction: column;
+    }
+    
+    .preset-btn {
+        width: 100%;
+    }
+    
+    .take-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .take-btn {
+        width: 100%;
+    }
+    
+    .bean {
+        width: 35px;
+        height: 45px;
+    }
+    
+    .count-display {
+        font-size: 2em;
+    }
+}

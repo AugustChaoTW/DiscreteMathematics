@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramsey 豆子遊戲 - Ramsey Number Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 Ramsey 豆子遊戲</h1>
+            <p class="subtitle">基於 Ramsey Theory 的策略對戰遊戲</p>
+        </header>
+
+        <div class="theory-section">
+            <h2>📚 什麼是 Ramsey Number？</h2>
+            <div class="theory-content">
+                <p><strong>Ramsey Theory</strong> 研究的是：在足夠大的結構中，必然會出現某種有序的子結構。</p>
+                <p>經典的 Ramsey number R(r,b) 定義：在一個完全圖中，將邊著色為紅色或藍色，至少需要多少個頂點才能保證存在一個 r 個頂點的紅色完全子圖或 b 個頂點的藍色完全子圖。</p>
+                <div class="ramsey-examples">
+                    <div class="example">
+                        <strong>R(3,3) = 6</strong>
+                        <p>在 6 人聚會中，必定存在 3 人彼此認識或 3 人彼此不認識</p>
+                    </div>
+                    <div class="example">
+                        <strong>R(4,4) = 18</strong>
+                        <p>需要 18 個頂點才能保證存在 4 個頂點的單色完全子圖</p>
+                    </div>
+                    <div class="example">
+                        <strong>R(5,5) = ?</strong>
+                        <p>目前只知道 43 ≤ R(5,5) ≤ 48，尚未確定！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-section">
+            <h2>🎮 遊戲規則</h2>
+            <div class="rules">
+                <div class="rule">
+                    <span class="rule-number">1</span>
+                    <p>遊戲開始時有一堆豆子（數量基於 Ramsey number）</p>
+                </div>
+                <div class="rule">
+                    <span class="rule-number">2</span>
+                    <p>兩位玩家輪流拿豆子</p>
+                </div>
+                <div class="rule">
+                    <span class="rule-number">3</span>
+                    <p>每次可以拿 1 到 3 顆豆子</p>
+                </div>
+                <div class="rule">
+                    <span class="rule-number">4</span>
+                    <p><strong>拿到最後一顆豆子的玩家輸掉遊戲！</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <h3>選擇初始豆子數量</h3>
+            <div class="preset-buttons">
+                <button onclick="startGame(6)" class="preset-btn">R(3,3) = 6</button>
+                <button onclick="startGame(9)" class="preset-btn">R(3,4) = 9</button>
+                <button onclick="startGame(14)" class="preset-btn">R(3,5) = 14</button>
+                <button onclick="startGame(18)" class="preset-btn">R(4,4) = 18</button>
+                <button onclick="startGame(25)" class="preset-btn">R(3,6) = 25</button>
+            </div>
+            <div class="custom-input">
+                <label>或自訂數量：</label>
+                <input type="number" id="customBeans" min="1" max="50" value="6">
+                <button onclick="startCustomGame()" class="start-btn">開始遊戲</button>
+            </div>
+        </div>
+
+        <div id="gameBoard" class="game-board" style="display: none;">
+            <div class="game-info">
+                <div class="player-info player1">
+                    <h3>玩家 1</h3>
+                    <div class="player-status" id="player1Status">等待中...</div>
+                </div>
+                <div class="beans-count">
+                    <h3>剩餘豆子</h3>
+                    <div class="count-display" id="beansCount">0</div>
+                </div>
+                <div class="player-info player2">
+                    <h3>玩家 2</h3>
+                    <div class="player-status" id="player2Status">等待中...</div>
+                </div>
+            </div>
+
+            <div class="beans-container" id="beansContainer">
+                <!-- 豆子會動態生成在這裡 -->
+            </div>
+
+            <div class="action-buttons">
+                <h3 id="turnIndicator">輪到玩家 1</h3>
+                <div class="take-buttons">
+                    <button onclick="takeBeans(1)" class="take-btn">拿 1 顆</button>
+                    <button onclick="takeBeans(2)" class="take-btn">拿 2 顆</button>
+                    <button onclick="takeBeans(3)" class="take-btn">拿 3 顆</button>
+                </div>
+            </div>
+
+            <div class="game-history">
+                <h3>遊戲記錄</h3>
+                <div id="historyLog" class="history-log"></div>
+            </div>
+
+            <button onclick="resetGame()" class="reset-btn">重新開始</button>
+        </div>
+
+        <div id="gameOver" class="game-over" style="display: none;">
+            <div class="winner-announcement">
+                <h2 id="winnerText"></h2>
+                <p id="winnerMessage"></p>
+                <button onclick="resetGame()" class="play-again-btn">再玩一次</button>
+            </div>
+        </div>
+
+        <div class="strategy-section">
+            <h2>🧠 獲勝策略提示</h2>
+            <div class="strategy-content">
+                <p>這是一個 <strong>Nim-type game</strong> 的變體。關鍵在於理解「安全位置」和「危險位置」：</p>
+                <ul>
+                    <li><strong>安全位置：</strong>剩餘豆子數 % 4 ≠ 1 時，你有必勝策略</li>
+                    <li><strong>危險位置：</strong>剩餘豆子數 % 4 = 1 時，對手有必勝策略</li>
+                    <li><strong>獲勝技巧：</strong>每次拿完後，讓剩餘豆子數 % 4 = 1 給對手</li>
+                    <li>例如：剩 18 顆時拿 1 顆留 17，剩 13 顆時拿 3 顆留 10，以此類推維持 4n+1 的模式</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
