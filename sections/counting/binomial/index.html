@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>符文魔法：Binomial Burst</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>✨ 符文魔法：Binomial Burst ✨</h1>
+        <p class="subtitle">雙人對戰 · 二項式展開對決</p>
+    </div>
+
+    <div class="game-info">
+        <div class="info-item">
+            <span class="label">當前回合：</span>
+            <span id="turn" class="turn-text">玩家 A (X)</span>
+        </div>
+        <div class="info-item">
+            <span class="label">進度：</span>
+            <span id="progress" class="progress-text">0/7</span>
+        </div>
+        <div class="info-item">
+            <span class="label">難度：</span>
+            <select id="difficulty" onchange="changeDifficulty()">
+                <option value="5">簡單 (n=5)</option>
+                <option value="7" selected>普通 (n=7)</option>
+                <option value="10">困難 (n=10)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 雙人魔力條 -->
+    <div class="players-status">
+        <div class="player-panel player-a">
+            <div class="player-name">玩家 A</div>
+            <div class="player-score">
+                <span id="scoreA">0</span> pts
+            </div>
+            <div class="magic-bar">
+                <div class="magic-fill" id="magicA" style="width: 100%;">
+                    <span id="magicTextA">3/3 ⚡</span>
+                </div>
+            </div>
+            <div class="magic-buttons" id="buttonsA">
+                <button class="magic-btn lock-btn" onclick="useMagic('A', 'lock')" title="鎖定一個格子">🔒 鎖</button>
+                <button class="magic-btn swap-btn" onclick="useMagic('A', 'swap')" title="交換一個符文">🔄 換</button>
+            </div>
+        </div>
+
+        <div class="vs-indicator">VS</div>
+
+        <div class="player-panel player-b">
+            <div class="player-name">玩家 B</div>
+            <div class="player-score">
+                <span id="scoreB">0</span> pts
+            </div>
+            <div class="magic-bar">
+                <div class="magic-fill" id="magicB" style="width: 100%;">
+                    <span id="magicTextB">3/3 ⚡</span>
+                </div>
+            </div>
+            <div class="magic-buttons" id="buttonsB">
+                <button class="magic-btn lock-btn" onclick="useMagic('B', 'lock')" title="鎖定一個格子">🔒 鎖</button>
+                <button class="magic-btn swap-btn" onclick="useMagic('B', 'swap')" title="交換一個符文">🔄 換</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 魔法陣背景 -->
+    <svg id="magicCircle" viewBox="0 0 400 400" class="magic-circle">
+        <defs>
+            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:#66aaff;stop-opacity:0.3" />
+                <stop offset="100%" style="stop-color:#66aaff;stop-opacity:0" />
+            </radialGradient>
+        </defs>
+        <circle cx="200" cy="200" r="180" fill="url(#glow)" stroke="#66aaff" stroke-width="2" opacity="0" class="magic-aura"/>
+        <g class="rune-circle" opacity="0.2">
+            <circle cx="200" cy="50" r="8" fill="#7bc4ff"/>
+            <circle cx="340" cy="100" r="8" fill="#7bc4ff"/>
+            <circle cx="350" cy="250" r="8" fill="#7bc4ff"/>
+            <circle cx="200" cy="350" r="8" fill="#7bc4ff"/>
+            <circle cx="50" cy="250" r="8" fill="#7bc4ff"/>
+            <circle cx="60" cy="100" r="8" fill="#7bc4ff"/>
+        </g>
+    </svg>
+
+    <div id="runes" class="runes-container"></div>
+
+    <div id="hint" class="hint-box"></div>
+
+    <!-- 目標顯示 -->
+    <div class="target-box">
+        <h3>🎯 搶奪目標</h3>
+        <p id="targetInfo">首先達到最優係數值可獲得 <span id="targetBonus">+30</span> 分！</p>
+    </div>
+
+    <div id="calc-panel" class="calc-panel"></div>
+
+    <div id="magic" class="magic-effect">🔮 魔法釋放！</div>
+
+    <div class="controls">
+        <button onclick="resetGame()" class="btn btn-reset">重新開始</button>
+        <button onclick="toggleInfo()" class="btn btn-info">遊戲說明</button>
+    </div>
+
+    <!-- 遊戲說明對話框 -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="toggleInfo()">&times;</span>
+            <h2>📖 遊戲說明</h2>
+            <h3>🎮 基本規則：</h3>
+            <ul>
+                <li><strong>玩家 A</strong> 放置 <span class="x-text">X 符文</span></li>
+                <li><strong>玩家 B</strong> 放置 <span class="y-text">Y 符文</span></li>
+                <li>輪流選擇格子，不能重複放置</li>
+            </ul>
+            <h3>⚡ 魔法系統：</h3>
+            <ul>
+                <li><strong>🔒 鎖定</strong>（1魔力）：點擊空格子封鎖，對手無法放置</li>
+                <li><strong>🔄 交換</strong>（2魔力）：點擊任意符文改為你的顏色</li>
+            </ul>
+            <h3>🏆 計分系統：</h3>
+            <ul>
+                <li>最終係數最大 → +50 分</li>
+                <li>更接近最優k值 → +25 分</li>
+                <li>首先達到最優k值 → +30 分（未達成則不計）</li>
+            </ul>
+            <h3>🎯 搶奪機制：</h3>
+            <ul>
+                <li>誰先成功放置出最大係數就贏得「搶奪獎勵」</li>
+                <li>對手可以用魔法阻擋或改變你的策略</li>
+            </ul>
+            <h3>📘 二項式定理：</h3>
+            <p>(x + y)^n = Σ C(n,k) · x^(n-k) · y^k</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="game.js"></script>
+
+</body>
+</html>

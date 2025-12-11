@@ -1,0 +1,18 @@
+theme: jekyll-theme-minimal
+title: 離散數學 (Discrete Mathematics)
+description: 離散數學的學習資源與筆記
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+exclude:
+  - .git
+  - .gitignore
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+
+plugins:
+  - jekyll-seo-tag
