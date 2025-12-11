@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramsey Numbers 回家作業 - 離散數學</title>
+    <link rel="stylesheet" href="homework-style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="homework-header">
+            <h1>🎮 Ramsey Numbers 遊戲設計專案</h1>
+            <div class="course-info">
+                <p><strong>課程：</strong>離散數學 Discrete Mathematics</p>
+                <p><strong>主題：</strong>Ramsey Theory 應用 - 對戰遊戲設計</p>
+                <p><strong>截止日期：</strong><span id="dueDate"></span></p>
+            </div>
+            <div class="student-info">
+                <label>學號：</label>
+                <input type="text" id="studentId" placeholder="請輸入學號">
+                <label>姓名：</label>
+                <input type="text" id="studentName" placeholder="請輸入姓名">
+            </div>
+        </header>
+
+        <!-- 專案說明 -->
+        <section class="instructions-section">
+            <h2>📋 專案目標</h2>
+            <div class="instructions">
+                <p><strong>設計一個基於 Ramsey Numbers 概念的雙人對戰遊戲</strong></p>
+                <p>你需要使用 HTML、CSS 和 JavaScript 創建一個互動式遊戲，展現你對 Ramsey Theory 的理解。</p>
+                <ul>
+                    <li>🎯 <strong>目標：</strong>設計並實作一個可玩的雙人對戰遊戲</li>
+                    <li>📚 <strong>理論基礎：</strong>遊戲機制必須與 Ramsey Numbers 相關</li>
+                    <li>💻 <strong>技術要求：</strong>使用 HTML/CSS/JavaScript 實作</li>
+                    <li>📊 <strong>總分：</strong>100 分（詳見評分標準）</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Ramsey Theory 基礎知識檢核 -->
+        <section class="theory-check">
+            <h2>📚 第一部分：Ramsey Theory 基礎 (20分)</h2>
+            <p class="section-intro">在開始設計遊戲前，請先回答以下基礎問題，確保你理解 Ramsey Numbers 的核心概念。</p>
+            
+            <div class="question-card">
+                <div class="question-header">
+                    <h3>問題 1 (10分)</h3>
+                    <span class="question-type">選擇題</span>
+                </div>
+                <div class="question-content">
+                    <p>R(3,3) = 6 在「聚會問題」中的意義是：</p>
+                    <div class="options">
+                        <label class="option">
+                            <input type="radio" name="q1" value="a">
+                            <span>(A) 在 6 人聚會中，必定存在 3 人彼此認識或 3 人彼此不認識</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="b">
+                            <span>(B) 需要 6 個人才能開始一場聚會</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="c">
+                            <span>(C) 6 個人中最多有 3 對朋友</span>
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="q1" value="d">
+                            <span>(D) 以上皆非</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3>問題 2 (10分)</h3>
+                    <span class="question-type">填空題</span>
+                </div>
+                <div class="question-content">
+                    <p>列舉三個已知的 Ramsey numbers 及其值：</p>
+                    <div class="ramsey-values">
+                        <p>R(3,3) = <input type="number" id="q2a" class="fill-blank-small" min="1" max="20"></p>
+                        <p>R(3,4) = <input type="number" id="q2b" class="fill-blank-small" min="1" max="20"></p>
+                        <p>R(4,4) = <input type="number" id="q2c" class="fill-blank-small" min="1" max="30"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 遊戲設計專案 -->
+        <section class="project-section">
+            <h2>🎮 第二部分：遊戲設計專案 (80分)</h2>
+            <p class="section-intro">請設計並實作一個基於 Ramsey Numbers 的雙人對戰遊戲。</p>
+            
+            <!-- 遊戲設計要求 -->
+            <div class="requirement-card">
+                <h3>📋 遊戲設計要求</h3>
+                <div class="requirements-grid">
+                    <div class="requirement-item">
+                        <h4>1. 遊戲機制 (30分)</h4>
+                        <ul>
+                            <li>✓ 必須是<strong>雙人對戰</strong>遊戲</li>
+                            <li>✓ 遊戲規則與 <strong>Ramsey Numbers</strong> 相關</li>
+                            <li>✓ 明確的<strong>勝負條件</strong></li>
+                            <li>✓ 具有<strong>策略性</strong>，不是純運氣遊戲</li>
+                            <li>✓ 遊戲可<strong>重複遊玩</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h4>2. 技術實作 (30分)</h4>
+                        <ul>
+                            <li>✓ 使用 <strong>HTML</strong> 建立遊戲介面</li>
+                            <li>✓ 使用 <strong>CSS</strong> 設計美觀的樣式</li>
+                            <li>✓ 使用 <strong>JavaScript</strong> 實作遊戲邏輯</li>
+                            <li>✓ 具備完整的<strong>互動功能</strong></li>
+                            <li>✓ 程式碼結構<strong>清晰</strong>，有適當註解</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h4>3. 理論說明 (10分)</h4>
+                        <ul>
+                            <li>✓ 說明遊戲與 Ramsey Theory 的<strong>關聯</strong></li>
+                            <li>✓ 解釋遊戲中使用的 <strong>Ramsey Number(s)</strong></li>
+                            <li>✓ 提供<strong>遊戲規則</strong>說明</li>
+                            <li>✓ 說明<strong>獲勝策略</strong>（如果有）</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="requirement-item">
+                        <h4>4. 額外加分項目 (10分)</h4>
+                        <ul>
+                            <li>✓ 視覺化效果（動畫、圖形）</li>
+                            <li>✓ 遊戲歷史記錄</li>
+                            <li>✓ 難度選擇或自訂參數</li>
+                            <li>✓ 響應式設計（支援手機）</li>
+                            <li>✓ AI 對手選項</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 遊戲靈感 -->
+            <div class="inspiration-card">
+                <h3>💡 遊戲設計靈感</h3>
+                <div class="game-ideas">
+                    <div class="game-idea">
+                        <h4>方案 A：豆子遊戲</h4>
+                        <p>初始有 R(3,3) = 6 顆豆子，兩人輪流拿 1-3 顆，拿到最後一顆的人輸</p>
+                        <span class="difficulty">難度: ★☆☆☆☆</span>
+                    </div>
+                    
+                    <div class="game-idea">
+                        <h4>方案 B：圖著色遊戲</h4>
+                        <p>在完全圖上輪流為邊著色，第一個形成單色三角形的玩家輸</p>
+                        <span class="difficulty">難度: ★★★☆☆</span>
+                    </div>
+                    
+                    <div class="game-idea">
+                        <h4>方案 C：聚會遊戲</h4>
+                        <p>模擬 R(3,3) 的聚會問題，兩人輪流決定人際關係，目標是達成或避免特定模式</p>
+                        <span class="difficulty">難度: ★★★★☆</span>
+                    </div>
+                    
+                    <div class="game-idea">
+                        <h4>方案 D：自創遊戲</h4>
+                        <p>發揮創意，設計你自己的 Ramsey 遊戲！只要符合要求即可</p>
+                        <span class="difficulty">難度: ★★★★★</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 提交檢核表 -->
+            <div class="checklist-card">
+                <h3>✅ 提交前檢核表</h3>
+                <div class="checklist">
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check1">
+                        <span>我的遊戲可以正常運行，沒有明顯錯誤</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check2">
+                        <span>遊戲規則與 Ramsey Numbers 有明確關聯</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check3">
+                        <span>包含完整的遊戲說明和理論解釋</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check4">
+                        <span>程式碼有適當的註解和結構</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check5">
+                        <span>測試過雙人對戰功能確實可用</span>
+                    </label>
+                    <label class="checklist-item">
+                        <input type="checkbox" id="check6">
+                        <span>HTML、CSS、JavaScript 三個檔案都已完成</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- 檔案上傳區 -->
+            <div class="upload-card">
+                <h3>📤 作品上傳</h3>
+                <p>請上傳你的遊戲專案檔案（HTML, CSS, JS）：</p>
+                <div class="file-upload-area">
+                    <div class="upload-item">
+                        <label>HTML 檔案：</label>
+                        <input type="file" id="htmlFile" accept=".html" onchange="handleFileUpload('html', this)">
+                        <span id="htmlStatus" class="upload-status"></span>
+                    </div>
+                    <div class="upload-item">
+                        <label>CSS 檔案：</label>
+                        <input type="file" id="cssFile" accept=".css" onchange="handleFileUpload('css', this)">
+                        <span id="cssStatus" class="upload-status"></span>
+                    </div>
+                    <div class="upload-item">
+                        <label>JavaScript 檔案：</label>
+                        <input type="file" id="jsFile" accept=".js" onchange="handleFileUpload('js', this)">
+                        <span id="jsStatus" class="upload-status"></span>
+                    </div>
+                </div>
+                <button onclick="previewGame()" class="control-btn primary">預覽遊戲</button>
+            </div>
+            
+            <!-- 遊戲說明區 -->
+            <div class="description-card">
+                <h3>📝 遊戲說明</h3>
+                <p>請在下方詳細說明你的遊戲設計：</p>
+                
+                <div class="description-section">
+                    <h4>遊戲名稱</h4>
+                    <input type="text" id="gameName" class="text-input" placeholder="為你的遊戲取個名字">
+                </div>
+                
+                <div class="description-section">
+                    <h4>遊戲規則（必填）</h4>
+                    <textarea id="gameRules" rows="6" class="description-text" placeholder="詳細說明遊戲的規則、如何進行、勝負條件等..."></textarea>
+                </div>
+                
+                <div class="description-section">
+                    <h4>Ramsey Theory 關聯（必填）</h4>
+                    <textarea id="ramseyConnection" rows="6" class="description-text" placeholder="解釋你的遊戲如何與 Ramsey Numbers 相關，使用了哪些 Ramsey Theory 的概念..."></textarea>
+                </div>
+                
+                <div class="description-section">
+                    <h4>獲勝策略（選填）</h4>
+                    <textarea id="strategy" rows="4" class="description-text" placeholder="如果你的遊戲有必勝策略，請在此說明..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- 提交區域 -->
+        <section class="submit-section">
+            <div class="score-display" id="scoreDisplay" style="display: none;">
+                <h3>📊 專案評分</h3>
+                <div class="score-details">
+                    <div class="total-score" id="totalScore">0</div>
+                    <div class="score-breakdown" id="scoreBreakdown"></div>
+                </div>
+            </div>
+            <button onclick="submitHomework()" class="submit-btn">提交專案並查看初步評分</button>
+            <button onclick="resetHomework()" class="reset-homework-btn">重新開始</button>
+            <p class="submit-note">💡 注意：這只是初步自動評分。教師將會手動審核你的遊戲並給予最終成績。</p>
+        </section>
+
+        <!-- 參考資料 -->
+        <section class="references-section">
+            <h2>📚 參考資料</h2>
+            <ul>
+                <li>Graham, R. L., Rothschild, B. L., & Spencer, J. H. (1990). <em>Ramsey Theory</em>. Wiley.</li>
+                <li>Radziszowski, S. P. (2014). Small Ramsey Numbers. <em>Electronic Journal of Combinatorics</em>.</li>
+                <li><a href="https://en.wikipedia.org/wiki/Ramsey_theory" target="_blank">Ramsey Theory - Wikipedia</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <script src="homework-script.js"></script>
+</body>
+</html>
