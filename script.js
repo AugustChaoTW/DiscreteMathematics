@@ -274,6 +274,12 @@ function updateTotalScore() {
 }
 
 function startTopic(topicKey) {
+    // Validate topicKey
+    if (!topics[topicKey]) {
+        console.error('Invalid topic key:', topicKey);
+        return;
+    }
+    
     currentTopic = topicKey;
     currentQuestionIndex = 0;
     currentScore = 0;
@@ -312,6 +318,7 @@ function showQuestion() {
         const button = document.createElement('button');
         button.className = 'option-btn';
         button.textContent = option;
+        button.setAttribute('aria-label', `選項 ${index + 1}: ${option}`);
         button.onclick = () => checkAnswer(index);
         optionsDiv.appendChild(button);
     });
